@@ -1,6 +1,6 @@
 ---
 - name: play for jenkins server(s)
   become: true
-  hosts: jenkins
+  hosts: _jenkins
   roles:
     - jenkins
