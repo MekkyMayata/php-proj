@@ -1,0 +1,31 @@
+---
+# tasks file for jenkins
+- name: obtain jenkins repo
+  get_url:
+    url: https://pkg.jenkins.io/redhat-stable/jenkins.repo
+    dest: /etc/yum.repos.d/jenkins.repo
+    mode: '0644'
+
+- name: Import key
+  ansible.builtin.rpm_key:
+    state: present
+    key: https://pkg.jenkins.io/redhat-stable/jenkins.io.key
+
+- name: Upgrade
+  dnf:
+    name: '*'
+    state: latest
+
+- name: install java and jenkins
+  yum:
+    name: ['java-1.8.0-openjdk-devel', 'jenkins']
+    state: present
+
+- name: allow systemd to reread configs
+  ansible.builtin.systemd:
+    daemon_reload: yes
+
+- name: start jenkins
+  ansible.builtin.systemd:
+    state: started
+    name: jenkins

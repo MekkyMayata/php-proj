@@ -1,0 +1,3 @@
+---
+- name: import jenkins playbook
+  import_playbook: ../static-assignments/jenkins.yml
