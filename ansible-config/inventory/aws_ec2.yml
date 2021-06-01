@@ -6,5 +6,17 @@ keyed_groups:
   - key: tags.Name
 filters:
   instance-state-name: running
+hostnames:
+# a list in order of precedence for hostname variables.
+  - private-ip-address
+  - ip-address
+  - dns-name
+  - tag:Name
 compose:
+# use if you need to connect via the ec2
+# private ip address. 
+#
+# this is needed for example in a 
+# corporate / company environment where ec2 
+# instances don't use a public ip address
   ansible_host: public_ip_address
