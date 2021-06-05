@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        image = "okpallannaemeka/php-todo"
+        image = "okpallannaemeka/php-todos"
         
     }
     stages {
