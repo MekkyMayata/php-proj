@@ -2,6 +2,7 @@ pipeline {
     agent any
     environment {
         image = "okpallannaemeka/php-todos"
+        image_tag = "0.0.1"
         
     }
     stages {
@@ -23,7 +24,7 @@ pipeline {
                     docker.withRegistry('https://registry.hub.docker.com/', 'docker-hub-cred') {
                         def customImage = docker.build("${image}", 'php-todo/')
                         customImage.push()
-                        customImage.push('latest')
+                        customImage.push("${image_tag}")
                     }
                 }
             }
