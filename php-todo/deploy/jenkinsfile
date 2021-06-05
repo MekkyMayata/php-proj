@@ -19,10 +19,12 @@ pipeline {
         }
         stage('build image') {
             steps {
-                docker.withRegistry('https://registry.hub.docker.com/', 'docker-credentials') {
-                    def customImage = docker.build("${image}")
-                    customImage.push()
-                    customImage.push('latest')
+                script {
+                    docker.withRegistry('https://registry.hub.docker.com/', 'docker-credentials') {
+                        def customImage = docker.build("${image}")
+                        customImage.push()
+                        customImage.push('latest')
+                    }
                 }
             }
         }
